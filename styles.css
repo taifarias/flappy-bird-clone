@@ -10,6 +10,8 @@ body {
 
 #board {
     background-image: url(images/bg.jpg);
+    background-color: purple;
+    background-size: cover;
     
     
 }

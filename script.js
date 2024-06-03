@@ -1,7 +1,7 @@
 // variaveis board
 
 let board;
-let boardWidth = 1600;
+let boardWidth = 1200;
 let boardHeight = 734;
 let context;
 
@@ -125,7 +125,8 @@ function update() { //vai redesenhar o canvas over and over
     context.fillText(score, 5, 45)
 
     if(gameOver) {
-        context.fillText("Game Over", 700, 250);
+        context.fillText("Game Over", 500, 250);
+        context.fillText("Sua pontuação: " + score, 450, 350);
     }
 }
 
