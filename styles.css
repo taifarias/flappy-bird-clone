@@ -1,17 +1,46 @@
 *{
     margin: 0;
-    padding: 0;
+    padding: 0;    
+    box-sizing: border-box;
+   
 }
 
 body {
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
+    position: absolute;
+    top: 20%;
+    background-color: rgb(6, 11, 43);
+
+   
 }
 
-#board {
-    background-image: url(images/bg.jpg);
+ #board {
+  
+    background-color: aquamarine;
+    width: 100%;
     
-    
+
+
+
+    background-size: cover;
+    overflow: hidden;
+   /* background-image: url(images/bg.jpg);
+   animation: slide-background 8s infinite linear; */
+   /* max-width: 100%;
+   max-height: 100%; */
+   /* background-position: cover;
+   overflow: hidden; */
+} 
+
+
+
+
+@keyframes slide-background {
+    from {
+        transform: translateX(+100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
 }
-
-
