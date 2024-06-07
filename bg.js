@@ -1,7 +1,7 @@
 // Variáveis globais
 let canvas, ctx;
-const canvasWidth = 800;
-const canvasHeight = 600;
+const canvasW idth = 800;
+const canvasHe ight = 600;
 
 let bird, pipeTopImg, pipeBottomImg, bgImg, startImg;
 let gravity = 0.5;
