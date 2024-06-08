@@ -5,12 +5,12 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #4ec0ca;
+    background-image: linear-gradient(to bottom, rgb(15, 19, 46), rgb(32, 61, 79));
 }
 
 canvas {
      
-    background-color: #fff;
+    
     display: block;
     margin: auto;
     max-width: 100%;

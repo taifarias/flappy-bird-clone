@@ -1,12 +1,14 @@
 # flappy-bird-game
- 
-clone de flappy bird 
+
+clone de flappy bird
 
 -fazer sua propria versao do jogo flappy bird como atividade avaliativa para o curso de programação FANTech/FGV
 
 -HTML, CSS e JavaScript
 
-07/06/2024
+
+
++07/06/2024
 
 Após passar a semana pesquisando e experimentando com o chatgpt, ontem a noite acho que virei a chave na lógica do processo de escrever o jogo.
 Montei um plano/roteiro meu com as coisas que quero implementar.
@@ -14,10 +16,10 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
 -> controles
     Space - começar o jogo (tela de inicio)
     Space - reiniciar o jogo (tela game over)
-    Space - voar
-    ArrowUp - voar
-    ArrowRight - ir pra frente
-    ArrowLeft - ir pra tras
+    Space - voar ✔
+    ArrowUp - voar ✔
+    ArrowRight - ir pra frente ✔
+    ArrowLeft - ir pra tras ✔
 
 
     Inicia : Tela de Inicio ✔
@@ -27,13 +29,13 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
 
     Jogo : 
         -> bg dinamico
-        -> bird posição inicial
+        -> bird posição inicial ✔
         -> pipe posição inicial
 
         ->check se tem score salvo se {true => return scoreSavo e seguir em frente } ; se {false => seguir em frente };
         
 
-        -> movimento/gravidade é aplicada ao bird
+        -> movimento/gravidade é aplicada ao bird ✔
         -> movimento/velocidade é aplicada aos pipes
         -> check Colisão (bird, pipe) se {true => vai ativa a tela de Game Over}; se {false => volta a aplicar gravidade e movimento }
 
@@ -47,7 +49,7 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
             *"Ou aperte *Space* para recomeçar"
 
 
- 08/06/2024 00:20
+ +08/06/2024 00:20
  -> commit novo
  -> startScreen ✔
     => criada função gameLoop {clear, drawStartScreen, requestAnimationFrame}

@@ -111,7 +111,7 @@ function handleKeyPress(event) {
     if (event.code === "Space" && gameOver) {
         startGame();
     }
-    if (event.code === "Space" && !gameOver) {
+    if (event.code === "Space"  && !gameOver) {
         bird.velocity = -8; // Ajuste conforme necessário para controlar a altura do pulo
     }
 }
