@@ -21,6 +21,13 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
     ArrowRight - ir pra frente ✔
     ArrowLeft - ir pra tras ✔
 
+-> objetos 
+    bird ✔
+    pipes
+        top ✔
+        bottom ✔
+        gerar pipes infinitos
+        gerar pipes de forma aleatoria ✔
 
     Inicia : Tela de Inicio ✔
         -> bg estatico no fundo ✔
@@ -36,7 +43,7 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
         
 
         -> movimento/gravidade é aplicada ao bird ✔
-        -> movimento/velocidade é aplicada aos pipes
+        -> movimento/velocidade é aplicada aos pipes ✔
         -> check Colisão (bird, pipe) se {true => vai ativa a tela de Game Over}; se {false => volta a aplicar gravidade e movimento }
 
         -> adicionar 1 ponto a Pontuação cade vez que passar pelos pipes sem Colisão
@@ -49,9 +56,34 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
             *"Ou aperte *Space* para recomeçar"
 
 
+    Conteudo Adicional :
+                        StartScreen em .gif -> titulo com efeito
+
+                         Som
+                        -> musica de jogo
+                        -> efeito sonoro ao voar/ir p frente/ir p tras
+                        -> efeito sonoro ao morrer
+                        
+                        Créditos
+                        - credito do background
+                        - credito do bird
+                        - credito da musica                    
+
+
+
  +08/06/2024 00:20
  -> commit novo
  -> startScreen ✔
     => criada função gameLoop {clear, drawStartScreen, requestAnimationFrame}
     => criada startScreen;
     => let bgImg; const startScreen; constStartScreen2;
+
++13:00
+-> Controles de movimento ✔
+-> transição StartScreen>gameLoop ✔
+
++08/06/24 15:40
+-> criação do pipes
+-> aleatoriedade dos pipes
+-> NEXT: gerar pipes de forma infinita
+

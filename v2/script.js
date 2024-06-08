@@ -5,7 +5,7 @@ const ctx = canvas.getContext("2d");
 const canvasWidth = canvas.width = 1968;
 const canvasHeight = canvas.height = 560;
 
-let gameActive = true;
+let gameActive = false;
 let gameOver = false;
 
 
@@ -27,7 +27,7 @@ startScreen2.src = "images/startScreen2.png"; // 170:85
 
 
 let birdImg = new Image();
-birdImg.src = "images/birdImg.png";  //32x24 4:3
+birdImg.src = "images/birdImg.png";  // 4:3
     
 const bird = {
     img : birdImg,
@@ -45,6 +45,37 @@ birdImg.onload = function() {
 };
 
 
+let topPipeImg = new Image();
+topPipeImg.src = "images/top-pipe.png" // 67:525
+
+let bottomPipeImg = new Image();
+bottomPipeImg.src = "images/bottom-pipe.png"
+
+let topPipeY = Math.random() * (-620 + 350) -350; // essa variavel é o que controla o posicionamento dos pipes na tela
+let spaceBetweenPipes = 160; // essa variavel controla o espaço pra bird passar DIFCULDADE DO JOGO
+let pipeSpeed = 2;
+
+let topPipe = {
+    img: topPipeImg,
+    x: 950,
+    y: topPipeY,
+    width: 67*1.3,
+    height: 525*1.3,
+    speed: pipeSpeed,
+
+}
+
+let bottomPipe = {
+    img: bottomPipeImg,
+    x: 950,
+    y: topPipe.height + topPipeY + spaceBetweenPipes,
+    width: 67*1.3,
+    height: 525*1.3,
+    speed: pipeSpeed,
+}
+
+
+
 
 
 function drawStartScreen() {
@@ -60,11 +91,27 @@ function drawBird() {
     ctx.drawImage(bird.img, bird.x, bird.y, bird.width, bird.height);
 }
 
+function drawPipes() {
+
+    ctx.drawImage(topPipe.img, topPipe.x, topPipe.y, topPipe.width, topPipe.height);
+    ctx.drawImage(bottomPipe.img, bottomPipe.x, bottomPipe.y, bottomPipe.width, bottomPipe.height);
+}
+
+function generatePipes() {
+    
+
+}
+
 function update() {
     if(gameActive && !gameOver) {
         bird.velocityY += bird.gravity;
         bird.y += bird.velocityY;
         bird.x +=bird.velocityX;
+
+        topPipe.x -= pipeSpeed;
+        bottomPipe.x -= pipeSpeed;
+
+        generatePipes();
 
     }
    
@@ -72,8 +119,13 @@ function update() {
 }
 
 function handleKeyDown(event){
-    if(event.code === "Space" || event.code === "ArrowUp" && !gameOver) {
-        bird.velocityY = - 10;
+
+    if(event.code === "Space" && !gameActive && !gameOver) {
+        gameActive = true;
+    }
+
+    if(event.code === "Space" || event.code === "ArrowUp" && !gameOver) {   // DIFCULDADE DO JOGO -> quando maior o pulo maior a dificuldade
+        bird.velocityY = - 8;
     }
    
     if(event.code === "ArrowRight" && !gameOver) {
@@ -109,10 +161,11 @@ function gameLoop() {
         ctx.drawImage(bgImg, 0, 0); //adicionar movimento do background
         
         drawBird();
-
-        update(); // tem que ser criada
+        drawPipes();
         
-       //drawPipes();//tem que ser criada
+        update(); 
+        
+      
 
        
 
