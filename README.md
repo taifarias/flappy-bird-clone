@@ -14,30 +14,30 @@ Após passar a semana pesquisando e experimentando com o chatgpt, ontem a noite 
 Montei um plano/roteiro meu com as coisas que quero implementar.
 
 -> controles
-    Space - começar o jogo (tela de inicio)
+    Space - começar o jogo (tela de inicio) ✔
     Space - reiniciar o jogo (tela game over)
     Space - voar ✔
     ArrowUp - voar ✔
     ArrowRight - ir pra frente ✔
     ArrowLeft - ir pra tras ✔
 
--> objetos 
+-> Objetos 
     bird ✔
-    pipes
+    pipes ✔
         top ✔
         bottom ✔
-        gerar pipes infinitos
+        gerar pipes infinitos ✔
         gerar pipes de forma aleatoria ✔
 
     Inicia : Tela de Inicio ✔
         -> bg estatico no fundo ✔
         -> banner de inicio ✔
-        -> *Space* pra iniciar
+        -> *Space* pra iniciar ✔
 
     Jogo : 
         -> bg dinamico
         -> bird posição inicial ✔
-        -> pipe posição inicial
+        -> pipe posição inicial ✔
 
         ->check se tem score salvo se {true => return scoreSavo e seguir em frente } ; se {false => seguir em frente };
         
@@ -67,9 +67,12 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
                         Créditos
                         - credito do background
                         - credito do bird
-                        - credito da musica                    
+                        - credito da musica     
+                        
 
 
+
+RELATORIO
 
  +08/06/2024 00:20
  -> commit novo
@@ -82,8 +85,14 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
 -> Controles de movimento ✔
 -> transição StartScreen>gameLoop ✔
 
-+08/06/24 15:40
++15:40
 -> criação do pipes
 -> aleatoriedade dos pipes
 -> NEXT: gerar pipes de forma infinita
 
+
++08/06/24 22:40
+-> gera pipes de forma infinita
+-> posicionamento inicial dos pipes fora da tela
+-> apagar pipes que sairem da tela
+-> NEXT: criar check Collision
