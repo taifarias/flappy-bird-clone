@@ -44,16 +44,16 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
 
         -> movimento/gravidade é aplicada ao bird ✔
         -> movimento/velocidade é aplicada aos pipes ✔
-        -> check Colisão (bird, pipe) se {true => vai ativa a tela de Game Over}; se {false => volta a aplicar gravidade e movimento }
+        -> check Colisão (bird, pipe) se {true => vai ativa a tela de Game Over}; se {false => volta a aplicar gravidade e movimento } ✔
 
         -> adicionar 1 ponto a Pontuação cade vez que passar pelos pipes sem Colisão
 
-    Game Over : Tela de Game Over
+    Game Over : Tela de Game Over ✔
         -> bg estatico no fundo
         -> banner de Fim de Jogo c/ Pontuação
-            "Sua Pontuaão: " + score;
+            "Sua Pontuação: " + score;
             *Input => "Coloque seu nome: " + namePlayer c/c *Botão => salvar nome e score;
-            *"Ou aperte *Space* para recomeçar"
+            *"Ou aperte *Space* para recomeçar" ✔
 
 
     Conteudo Adicional :
@@ -92,7 +92,22 @@ RELATORIO
 
 
 +08/06/24 22:40
+-> pipes ✔
 -> gera pipes de forma infinita
 -> posicionamento inicial dos pipes fora da tela
 -> apagar pipes que sairem da tela
 -> NEXT: criar check Collision
+
+-> BUG REPORT : os pipes estão sendo gerados offscreen enquanto ta na startScreen, antes do jogo iniciar.
+
+
++09/06/24 19:30
+- BUG FIX : coloquei  setInterval(createPipes, pipeInterval);  dentro da function handleKeyPress, para que o timer só comece quando apertar 'Space'
+
++21:00
+-> criado checkCollision ✔
+-> criada gameOverScreen ✔
+-> implementado apertar SPACE para recomeçar o jogo ✔
+
+-> NEXT : resetar bird e pipes para as posiçoes iniciais
+-> NEXT : background dinamico

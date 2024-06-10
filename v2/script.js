@@ -12,15 +12,16 @@ let gameOver = false;
 const bgImg = new Image();
 bgImg.src = "images/bgImg.jpg";
 
-bgImg.onload = function() {   // ñ sei se é necessario   Adiciona um evento de carregamento para garantir que a imagem seja carregada antes de atribuí-la ao elemento de fundo
-    // Atribua a imagem carregada como o fundo do elemento HTML
-    background.style.backgroundImage = `url('${images/background-continuo.jpg}')`;
-};
-    
+ 
 const startScreen = new Image();
 startScreen.src = "images/startScreen.png";   // 253:93
 const startScreen2 = new Image();
 startScreen2.src = "images/startScreen2.png"; // 170:85
+
+const gameOverScreen = new Image();
+gameOverScreen.src = "images/gameOverScreen.png";  //256:59
+const gameOverScreen2 = new Image();
+gameOverScreen2.src = "images/gameOverScreen2.png"; //256:83
 
 
 const birdImg = new Image();
@@ -34,10 +35,6 @@ const bird = {
     velocityY: 0,
     velocityX: 0,
     gravity: 1,
-};
-birdImg.onload = function() { 
-    // A imagem do pássaro foi carregada
-    console.log("Bird image loaded");
 };
 
 
@@ -76,8 +73,6 @@ function createPipes() {                              //criado top e bottom Pipe
     pipes.push(topPipe, bottomPipe);
 }
 
-setInterval(createPipes, pipeInterval);
-
 function drawPipes() {
     for (let i = 0; i < pipes.length; i += 2) {
         let topPipe = pipes[i];
@@ -93,9 +88,19 @@ function drawStartScreen() {
        
             //seria bom adicionar um fundo meio transparente pra ficar melhor a visibilidade
     ctx.drawImage(bgImg, 0, 0); //background
-    ctx.drawImage(startScreen, canvas.width/3.5, canvas.height/8, 256*3, 93*3);   // title
-    ctx.drawImage(startScreen2, canvas.width/2.5, canvas.height/1.5, 170*1.8, 85*1.5); //press start
+    ctx.drawImage(startScreen, canvas.width/3.5, canvas.height/8, 253*3, 93*3);   // title
+    ctx.drawImage(startScreen2, canvas.width/2.5, canvas.height/1.5, 170*1.5, 85*1.5); //press start
+
 }
+
+function drawGameOverScreen() {
+    ctx.drawImage(bgImg, 0, 0); //background
+    ctx.drawImage(gameOverScreen, canvas.width/3.5, canvas.height/7, 256*4, 59*4);   // title
+    ctx.drawImage(gameOverScreen2, canvas.width/2.5, canvas.height/2, 256*1.8, 83*1.5); //press start
+
+}
+
+
 
 function drawBird() {
        
@@ -115,17 +120,56 @@ function update() {
        }
        pipes = pipes.filter(pipe => pipe.x + pipe.width > 0);
 
+       if (checkCollision(bird, pipes)) {
+        gameOver = true;
+    }
     }       
 }
+
+
+function checkCollision(bird, pipes) {
+    // Itera sobre o array pipes em passos de 2 para pegar pares de canos (topPipe e bottomPipe)
+    for (let i = 0; i < pipes.length; i += 2) {
+        let topPipe = pipes[i];         // Cano superior
+        let bottomPipe = pipes[i + 1];  // Cano inferior
+
+        // Verifica colisão com o cano superior
+        if (bird.x < topPipe.x + topPipe.width &&
+            bird.x + bird.width > topPipe.x &&
+            bird.y < topPipe.y + topPipe.height &&
+            bird.y + bird.height > topPipe.y) {
+            return true; // Colisão detectada
+        }
+
+        // Verifica colisão com o cano inferior
+        if (bird.x < bottomPipe.x + bottomPipe.width &&
+            bird.x + bird.width > bottomPipe.x &&
+            bird.y < bottomPipe.y + bottomPipe.height &&
+            bird.y + bird.height > bottomPipe.y) {
+            return true; // Colisão detectada
+        }
+    }
+    return false; // Nenhuma colisão detectada
+}
+
 
 function handleKeyDown(event){
 
     if(event.code === "Space" && !gameActive && !gameOver) {
         gameActive = true;
+        setInterval(createPipes, pipeInterval);
     }
+    if(event.code === "Space" && gameOver) {
+        gameActive = true;
+        gameOver = false;
+
+    
+    }
+
 
     if((event.code === "Space" || event.code === "ArrowUp") && !gameOver) {   // DIFCULDADE DO JOGO -> quando maior o pulo maior a dificuldade
         bird.velocityY = - 8;
+
     }
    
     if(event.code === "ArrowRight" && !gameOver) {
@@ -146,29 +190,37 @@ function handleKeyUp(event){
 
 
 
-function gameLoop() {
+function gameLoop() {   
     ctx.clearRect(0,0, canvas.width, canvas.height);
 
     if(!gameActive && !gameOver) {        
         drawStartScreen();    
-    } 
-    
-    else if(gameActive && !gameOver) {
+    }  else if(gameActive && !gameOver) {
 
         ctx.drawImage(bgImg, 0, 0); //adicionar movimento do background
+        
         drawBird();
-
         drawPipes();
+        
         update();             
+ 
+    } else if(gameOver){
+        ctx.drawImage(bgImg, 0, 0); //adicionar movimento do background
+        
+        drawBird();
+        drawPipes();
 
+        drawGameOverScreen();
     }
-    
-     requestAnimationFrame(gameLoop);
+
+   
+     requestAnimationFrame(gameLoop);   // inicia o jogo
 
 }
 
 
 
 gameLoop();
+
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
