@@ -7,6 +7,7 @@ const canvasHeight = canvas.height = 560;
 
 let gameActive = false;
 let gameOver = false;
+let score = 0;
 
 
 const bgImg = new Image();
@@ -30,11 +31,17 @@ const bird = {
     img : birdImg,
     x: 650,
     y: 150,
-    width: 112,
-    height: 84,
+    width: 112/2,
+    height: 84/2,
     velocityY: 0,
     velocityX: 0,
     gravity: 1,
+    reset: function() {
+        this.x = 650;
+        this.y = 150;
+        this.velocityY = 0;
+        this.velocityX = 0;
+    }
 };
 
 
@@ -46,6 +53,7 @@ bottomPipeImg.src = "images/bottom-pipe.png"
 
 let pipes = [];
 const pipeInterval = 2000;
+let pipeIntervalId;
 
 function createPipes() {                              //criado top e bottom Pipe
     let topPipeY = Math.random() * (-620 + 350) -350; // essa variavel é o que controla o posicionamento dos pipes na tela
@@ -101,13 +109,16 @@ function drawGameOverScreen() {
 }
 
 
-
 function drawBird() {
        
     ctx.drawImage(bird.img, bird.x, bird.y, bird.width, bird.height);
 }
 
-
+function drawScore() {
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "white";
+    ctx.fillText(`Score: ${score}`, 50, 50);
+}
 
 function update() {
     if(gameActive && !gameOver) {
@@ -122,13 +133,20 @@ function update() {
 
        if (checkCollision(bird, pipes)) {
         gameOver = true;
+        clearInterval(pipeIntervalId); // Stop creating new pipes
+    } else {
+        for (let i = 0; i < pipes.length; i += 2) {
+            if(pipes[i].x + pipes[i].width < bird.x && pipes[i].x + pipes[i].width + pipes[i].speed >= bird.x) {
+                score++;
+            }
+        }
     }
     }       
 }
 
 
 function checkCollision(bird, pipes) {
-    // Itera sobre o array pipes em passos de 2 para pegar pares de canos (topPipe e bottomPipe)
+    // Itera sobre o array pipes de 2 para pegar pares de canos (topPipe e bottomPipe)
     for (let i = 0; i < pipes.length; i += 2) {
         let topPipe = pipes[i];         // Cano superior
         let bottomPipe = pipes[i + 1];  // Cano inferior
@@ -153,22 +171,32 @@ function checkCollision(bird, pipes) {
 }
 
 
+function resetGame() {
+    bird.reset(); // Reset bird position and velocity
+    pipes = []; // Clear all pipes
+    score = 0;
+   
+}
+
+
 function handleKeyDown(event){
 
     if(event.code === "Space" && !gameActive && !gameOver) {
         gameActive = true;
-        setInterval(createPipes, pipeInterval);
+        pipeIntervalId = setInterval(createPipes, pipeInterval); 
     }
     if(event.code === "Space" && gameOver) {
+        resetGame();
         gameActive = true;
         gameOver = false;
+        pipeIntervalId = setInterval(createPipes, pipeInterval);
 
     
     }
 
 
     if((event.code === "Space" || event.code === "ArrowUp") && !gameOver) {   // DIFCULDADE DO JOGO -> quando maior o pulo maior a dificuldade
-        bird.velocityY = - 8;
+        bird.velocityY = - 7;
 
     }
    
@@ -191,18 +219,22 @@ function handleKeyUp(event){
 
 
 function gameLoop() {   
-    ctx.clearRect(0,0, canvas.width, canvas.height);
+    ctx.clearRect(0,0, canvas.width, canvas.height); 
 
     if(!gameActive && !gameOver) {        
         drawStartScreen();    
+
+
     }  else if(gameActive && !gameOver) {
 
         ctx.drawImage(bgImg, 0, 0); //adicionar movimento do background
         
         drawBird();
         drawPipes();
+       drawScore();
+        update(); 
         
-        update();             
+                            
  
     } else if(gameOver){
         ctx.drawImage(bgImg, 0, 0); //adicionar movimento do background

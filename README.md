@@ -38,6 +38,7 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
         -> bg dinamico
         -> bird posição inicial ✔
         -> pipe posição inicial ✔
+        -> pontuação ✔
 
         ->check se tem score salvo se {true => return scoreSavo e seguir em frente } ; se {false => seguir em frente };
         
@@ -46,7 +47,7 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
         -> movimento/velocidade é aplicada aos pipes ✔
         -> check Colisão (bird, pipe) se {true => vai ativa a tela de Game Over}; se {false => volta a aplicar gravidade e movimento } ✔
 
-        -> adicionar 1 ponto a Pontuação cade vez que passar pelos pipes sem Colisão
+        -> adicionar 1 ponto a Pontuação cade vez que passar pelos pipes sem Colisão ✔
 
     Game Over : Tela de Game Over ✔
         -> bg estatico no fundo
@@ -68,7 +69,7 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
                         - credito do background
                         - credito do bird
                         - credito da musica     
-                        
+
 
 
 
@@ -102,7 +103,7 @@ RELATORIO
 
 
 +09/06/24 19:30
-- BUG FIX : coloquei  setInterval(createPipes, pipeInterval);  dentro da function handleKeyPress, para que o timer só comece quando apertar 'Space'
+- BUG FIX : coloquei  setInterval(createPipes, pipeInterval);  dentro da function handleKeyPress, para que o timer só comece quando apertar 'Space'.
 
 +21:00
 -> criado checkCollision ✔
@@ -111,3 +112,10 @@ RELATORIO
 
 -> NEXT : resetar bird e pipes para as posiçoes iniciais
 -> NEXT : background dinamico
+
+
++12/06/2024 17:00
+-> criado resetGame(), para resetar as posições dos objetos
+-> criado Score
+
+->NEXT : background dinamico
