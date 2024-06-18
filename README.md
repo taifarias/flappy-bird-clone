@@ -35,7 +35,7 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
         -> *Space* pra iniciar  ✔
 
     Jogo : 
-        -> bg dinamico
+        -> bg dinamico          ✔
         -> bird posição inicial ✔
         -> pipe posição inicial ✔
         -> pontuação            ✔
@@ -51,9 +51,9 @@ Montei um plano/roteiro meu com as coisas que quero implementar.
 
     Game Over : Tela de Game Over 
         -> bg estatico no fundo                 ✔
-        -> banner de Fim de Jogo c/ Pontuação
+        -> banner de Fim de Jogo c/ Pontuação   ✔
             "Game Over"                         ✔
-            "Sua Pontuação: " + score;
+            "Sua Pontuação: " + score;          ✔
             *"Ou aperte *Space* para recomeçar" ✔
 *Input => "Coloque seu nome: " + namePlayer c/c *Botão => salvar nome e score;
 
@@ -119,3 +119,9 @@ RELATORIO
 -> criado Score
 
 ->NEXT : background dinamico
+
++17/06/2024 22:25
+-> criado background dinamico (finalmente conseguir fazer funcionar kkkk)
+-> NEXT: equilibrar a dinamica entre velocidade dos pipes/bg/pulo do bird, por jogabilidade
+-> NÄCHSTE: implementar musica de jogo, musica de game over, musica de voo 
+-> BUG REPORT: similar ao outro bug, quando da gameOver os pipes continuam sendo criados offscreen
