@@ -33,10 +33,16 @@ const gameOverScreen2 = new Image();
 gameOverScreen2.src = "images/gameOverScreen2.png"; //256:83
 
 
-const birdImg = new Image();
+let birdVoando = [];
+birdVoando[0] = new Image();
+birdVoando[0].src = "images/birdImg.png";
+birdVoando[1] = new Image();
+birdVoando[1].src = "images/bird-fly.png";
+
+let birdImg = new Image();
 birdImg.src = "images/birdImg.png";  // 4:3    
-const bird = {
-    img : birdImg,
+let bird = {
+    img : birdVoando[0],
     x: 650,
     y: 150,
     width: 112/1.2,
@@ -49,6 +55,7 @@ const bird = {
         this.y = 150;
         this.velocityY = 0;
         this.velocityX = 0;
+        this.img = birdVoando[0];
     }
 };
 
@@ -272,10 +279,12 @@ function handleKeyDown(event){
     }
 
 
-    if((event.code === "Space" || event.code === "ArrowUp") && !gameOver) {   // DIFCULDADE DO JOGO -> quando maior o pulo maior a dificuldade
+    if((event.code === "Space" ||  event.code === "ArrowUp") && !gameOver) {   // DIFCULDADE DO JOGO -> quando maior o pulo maior a dificuldade
         bird.velocityY = - 8;
         soundJump.currentTime = 0;
         soundJump.play();
+         bird.img = birdVoando[1]; // quando muda pra 1 tudo para
+        
 
     }
    
@@ -291,10 +300,13 @@ function handleKeyUp(event){
     if(event.code === "ArrowRight" || event.code === "ArrowLeft" && !gameOver) {    //está funcionando, mas não está tão fluido
         bird.velocityX = 0
     }
-   
+    if((event.code === "Space" || event.code === "ArrowUp") && !gameOver) {   // DIFCULDADE DO JOGO -> quando maior o pulo maior a dificuldade
+        bird.img = birdVoando[0];
+        
+
+    }
+
 }
-
-
 
 
 gameLoop();
