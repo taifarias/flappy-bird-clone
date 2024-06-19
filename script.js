@@ -1,9 +1,12 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-
 const canvasWidth = canvas.width = 1968;
 const canvasHeight = canvas.height = 560;
+
+const soundGameActive = new Audio("sound/gameActive.mp3");
+const soundJump = new Audio("sound/jump.mp3");
+const soundGameOver = new Audio("sound/gameOver.mp3"); 
 
 
 
@@ -66,13 +69,15 @@ function drawStartScreen() {
     ctx.drawImage(bgImg, 0, 0); //background
     ctx.drawImage(startScreen, canvas.width/3.5, canvas.height/8, 253*3, 93*3);   // title
     ctx.drawImage(startScreen2, canvas.width/2.5, canvas.height/1.5, 170*1.5, 85*1.5); //press start
+    
+
 
 }
 
  let x = 0;
  let x2 = canvasWidth;
 function drawBackground() {
-      
+    
     ctx.drawImage(bgImg, x, 0);
     ctx.drawImage(bgImg, x2, 0);
 
@@ -81,6 +86,7 @@ function drawBackground() {
     }else{ x -= gameSpeed};
     if (x2 < -canvasWidth) {x2 = canvasWidth}
     else {x2 -= gameSpeed}
+
     
 }
 
@@ -136,49 +142,9 @@ function drawGameOverScreen() {
     ctx.font = ctx.font = "30px Arial";
     ctx.fillStyle = "white";
     ctx.fillText(`Sua Pontuação foi: ${score}`,900, 450);
+    soundGameActive.pause();
 
 }
-
-
-
-
-
-function update() {
-    if(gameActive && !gameOver) {
-        bird.velocityY += bird.gravity;
-        bird.y += bird.velocityY;
-        bird.x +=bird.velocityX;
-       
-      
-       for(let i = 0; i < pipes.length; i++) {
-            pipes[i].x -= pipes[i].speed;
-       }
-       pipes = pipes.filter(pipe => pipe.x + pipe.width > 0);
-
-       if (checkCollision(bird, pipes)) {
-        gameOver = true;
-        clearInterval(pipeInterval); // Stop creating new pipes
-       
-        
-    } if (bird.y > canvasHeight || bird.y < -10) { 
-
-        gameOver = true;
-
-    }
-    
-    
-    
-    else {
-        
-        for (let i = 0; i < pipes.length; i += 2) {
-            if(pipes[i].x + pipes[i].width < bird.x && pipes[i].x + pipes[i].width + pipes[i].speed >= bird.x) {
-                score++;
-            }
-        }
-    }
-    }       
-}
-
 
 function checkCollision(bird, pipes) {
     // Itera sobre o array pipes de 2 para pegar pares de canos (topPipe e bottomPipe)
@@ -204,6 +170,85 @@ function checkCollision(bird, pipes) {
     }
     return false; // Nenhuma colisão detectada
 }
+
+
+
+function update() {
+    if(gameActive && !gameOver) {
+        
+        
+        bird.velocityY += bird.gravity;
+        bird.y += bird.velocityY;
+        bird.x +=bird.velocityX;
+      
+       for(let i = 0; i < pipes.length; i++) {
+            pipes[i].x -= pipes[i].speed;
+       }
+       pipes = pipes.filter(pipe => pipe.x + pipe.width > 0);
+
+       if (checkCollision(bird, pipes)) {
+        gameOver = true;
+        clearInterval(pipeInterval); // Stop creating new pipes
+        soundGameActive.pause();
+        
+       
+        
+    } if (bird.y > canvasHeight || bird.y < -10) { 
+
+        gameOver = true;
+
+    }
+    
+    
+    
+    else {
+        
+        for (let i = 0; i < pipes.length; i += 2) {
+            if(pipes[i].x + pipes[i].width < bird.x && pipes[i].x + pipes[i].width + pipes[i].speed >= bird.x) {
+                score++;
+            }
+        }
+    }
+    }       
+}
+
+
+function gameLoop() {   
+    ctx.clearRect(0,0, canvas.width, canvas.height); 
+
+    if(!gameActive && !gameOver) {        
+        drawStartScreen();      
+      
+
+    }  else if(gameActive && !gameOver) {
+
+        drawBackground();
+        drawBird();
+        drawPipes();
+        drawScore();
+        update(); 
+        soundGameOver.currentTime = 0;
+        soundGameOver.play();
+        
+        
+                            
+ 
+    } else if(gameOver){
+        ctx.drawImage(bgImg, 0, 0); //adicionar movimento do background
+               
+        drawGameOverScreen();
+        soundGameActive.currentTime = 0;
+         soundGameActive.play(); 
+        
+    }
+
+   
+     requestAnimationFrame(gameLoop);   // inicia o jogo
+
+}
+
+
+
 function resetGame() {
     
     bird.reset(); // Reset bird position and velocity
@@ -211,12 +256,13 @@ function resetGame() {
     score = 0;
 }
 
-
 function handleKeyDown(event){
 
     if(event.code === "Space" && !gameActive && !gameOver) {
         gameActive = true;
         pipeIntervalId = setInterval(createPipes, pipeInterval); 
+        soundGameActive.currentTime = 0;
+         soundGameActive.play(); 
     }
     if(event.code === "Space" && gameOver) {
         resetGame();
@@ -228,6 +274,8 @@ function handleKeyDown(event){
 
     if((event.code === "Space" || event.code === "ArrowUp") && !gameOver) {   // DIFCULDADE DO JOGO -> quando maior o pulo maior a dificuldade
         bird.velocityY = - 8;
+        soundJump.currentTime = 0;
+        soundJump.play();
 
     }
    
@@ -246,37 +294,6 @@ function handleKeyUp(event){
    
 }
 
-
-
-function gameLoop() {   
-    ctx.clearRect(0,0, canvas.width, canvas.height); 
-
-    if(!gameActive && !gameOver) {        
-        drawStartScreen();    
-
-
-    }  else if(gameActive && !gameOver) {
-
-        //ctx.drawImage(bgImg, bgImg.x, 0); //adicionar movimento do background
-        drawBackground();
-        drawBird();
-        drawPipes();
-        drawScore();
-        update(); 
-        
-                            
- 
-    } else if(gameOver){
-        ctx.drawImage(bgImg, 0, 0); //adicionar movimento do background
-               
-        drawGameOverScreen();
-        
-    }
-
-   
-     requestAnimationFrame(gameLoop);   // inicia o jogo
-
-}
 
 
 
