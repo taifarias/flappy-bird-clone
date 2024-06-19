@@ -131,3 +131,32 @@ RELATORIO
 -> aumentei o pulo de 7 > 8; aumentei a velocidade do bg 4 > 5
 
 -> NÄCHSTE: implementar musica de jogo, musica de game over, musica de voo 
+
++20:00 
+    Primeira versão completa!!!
+
+    Features:
+    -> Controle do teclado space ↑ ← →
+    -> Dificuldade : Médio 
+            pipeInterval = 1000; 
+            bird.velocityY = - 8;
+            pipeSpeed = 6;
+            spaceBetweenPipes = 160; 
+    -> Muda de imagem quando pula
+    -> Efeitos Sonoros
+        musica durante o jogo
+        som quando morre
+        som quando pula
+
+    Primeiro projeto 100% completo!!!
+
+Implementações para o futuro:
+    * possibilidade de escrever seu nome pra salvar a pontuação
+    * versão mobile; responsividade e touch event
+    * versão app?
+    * escolher outros birds no futuro?
+    * 2 players?
+    * estilar o README
+
+    Enfim, por enquanto é isso. Muito carinho por esse projeto, aprendi MUITO e me sinto pronta pra enfrentar mais e CRIAR mais. 
+    Até a próxima Bird Cemetery.

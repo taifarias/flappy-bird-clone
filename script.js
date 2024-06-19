@@ -146,9 +146,9 @@ function drawGameOverScreen() {
     ctx.drawImage(bgImg, 0, 0); //background
     ctx.drawImage(gameOverScreen, canvas.width/3.5, canvas.height/7, 256*4, 59*4);   // title
     ctx.drawImage(gameOverScreen2, canvas.width/2.5, canvas.height/2, 256*1.8, 83*1.5); //press start
-    ctx.font = ctx.font = "30px Arial";
+    ctx.font = ctx.font = "34px Arial";
     ctx.fillStyle = "white";
-    ctx.fillText(`Sua Pontuação foi: ${score}`,900, 450);
+    ctx.fillText(`Sua Pontuação foi: ${score}`,850, 450);
     soundGameActive.pause();
 
 }
@@ -283,7 +283,7 @@ function handleKeyDown(event){
         bird.velocityY = - 8;
         soundJump.currentTime = 0;
         soundJump.play();
-         bird.img = birdVoando[1]; // quando muda pra 1 tudo para
+        bird.img = birdVoando[1]; // quando muda pra 1 tudo para
         
 
     }
