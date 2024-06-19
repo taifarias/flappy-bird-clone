@@ -110,7 +110,7 @@ RELATORIO
 -> criada gameOverScreen ✔
 -> implementado apertar SPACE para recomeçar o jogo ✔
 
--> NEXT : resetar bird e pipes para as posiçoes iniciais
+-> NEXT : resetar bird e pipes para as posiçoes iniciais✔
 -> NEXT : background dinamico
 
 
@@ -118,10 +118,16 @@ RELATORIO
 -> criado resetGame(), para resetar as posições dos objetos
 -> criado Score
 
-->NEXT : background dinamico
+->NEXT : background dinamico✔
 
 +17/06/2024 22:25
 -> criado background dinamico (finalmente conseguir fazer funcionar kkkk)
--> NEXT: equilibrar a dinamica entre velocidade dos pipes/bg/pulo do bird, por jogabilidade
+-> NEXT: equilibrar a dinamica entre velocidade dos pipes/bg/pulo do bird, por jogabilidade✔
 -> NÄCHSTE: implementar musica de jogo, musica de game over, musica de voo 
--> BUG REPORT: similar ao outro bug, quando da gameOver os pipes continuam sendo criados offscreen
+-> BUG REPORT: similar ao outro bug, quando da gameOver os pipes continuam sendo criados offscreen✔
+
++19/06/24 17:50
+-> BUG FIXED: aparecentemente consegui consertar o bug; estava usando clearInterval(pipeIntervalID) quando deveria ser (pipeInterval)
+-> aumentei o pulo de 7 > 8; aumentei a velocidade do bg 4 > 5
+
+-> NÄCHSTE: implementar musica de jogo, musica de game over, musica de voo 

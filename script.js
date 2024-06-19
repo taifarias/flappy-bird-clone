@@ -11,7 +11,7 @@ let gameActive = false;
 let gameOver = false;
 let score = 0;
 
-let gameSpeed = 3;
+let gameSpeed = 5;
 
 
 const bgImg = new Image();
@@ -72,9 +72,7 @@ function drawStartScreen() {
  let x = 0;
  let x2 = canvasWidth;
 function drawBackground() {
-   
-
-    
+      
     ctx.drawImage(bgImg, x, 0);
     ctx.drawImage(bgImg, x2, 0);
 
@@ -152,10 +150,6 @@ function update() {
         bird.x +=bird.velocityX;
        
       
-
-
-
-
        for(let i = 0; i < pipes.length; i++) {
             pipes[i].x -= pipes[i].speed;
        }
@@ -163,7 +157,9 @@ function update() {
 
        if (checkCollision(bird, pipes)) {
         gameOver = true;
-        clearInterval(pipeIntervalId); // Stop creating new pipes
+        clearInterval(pipeInterval); // Stop creating new pipes
+       
+        
     } if (bird.y > canvasHeight || bird.y < -10) { 
 
         gameOver = true;
@@ -209,10 +205,10 @@ function checkCollision(bird, pipes) {
     return false; // Nenhuma colisão detectada
 }
 function resetGame() {
+    
     bird.reset(); // Reset bird position and velocity
     pipes = []; // Clear all pipes
     score = 0;
-   
 }
 
 
@@ -226,14 +222,12 @@ function handleKeyDown(event){
         resetGame();
         gameActive = true;
         gameOver = false;
-        pipeIntervalId = setInterval(createPipes, pipeInterval);
-
-    
+         
     }
 
 
     if((event.code === "Space" || event.code === "ArrowUp") && !gameOver) {   // DIFCULDADE DO JOGO -> quando maior o pulo maior a dificuldade
-        bird.velocityY = - 7;
+        bird.velocityY = - 8;
 
     }
    
@@ -274,9 +268,7 @@ function gameLoop() {
  
     } else if(gameOver){
         ctx.drawImage(bgImg, 0, 0); //adicionar movimento do background
-        
-        drawBird();
-        drawPipes();
+               
         drawGameOverScreen();
         
     }
